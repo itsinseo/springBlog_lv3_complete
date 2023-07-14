@@ -13,7 +13,7 @@ public class SignupRequestDto {
     private String username;
 
     @Size(min = 8, max = 15)
-    @Pattern(regexp = "[`~!@#$%^&*()-_+={\\[}\\]:;\"'<>,./?|\\\\A-Za-z0-9]+", message = "알파벳 대소문자와 숫자와 특수문자로 구성되어야 합니다.")
+    @Pattern(regexp = "[`~!@#$%^&*()-_+={\\[}\\]:;\"'<>,./?|\\\\]+[A-Za-z0-9]+", message = "특수문자를 포함한 알파벳 대소문자와 숫자와 구성되어야 합니다.")
     private String password;
 
     private boolean admin = false;
