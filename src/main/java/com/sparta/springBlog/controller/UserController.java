@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,31 +27,36 @@ public class UserController {
 
     // 회원가입 API
     @PostMapping("/user/signup")
-    public ApiResponseDto signup(@RequestBody @Valid SignupRequestDto signupRequestDto, BindingResult bindingResult) {
+    public ResponseEntity<ApiResponseDto> signup(@RequestBody @Valid SignupRequestDto signupRequestDto, BindingResult bindingResult) {
         // Validation 예외처리
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         if (fieldErrors.size() > 0) {
             for (FieldError fieldError : fieldErrors) {
                 log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
             }
-            return new ApiResponseDto("회원 가입 실패", HttpStatus.BAD_REQUEST.value());
+            ApiResponseDto apiResponseDto = new ApiResponseDto("회원 가입 실패", HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponseDto);
         }
 
         try {
-            return userService.signup(signupRequestDto);
+            ApiResponseDto apiResponseDto = userService.signup(signupRequestDto);
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponseDto);
         } catch (IllegalArgumentException e) {
-            return new ApiResponseDto("중복된 아이디입니다.", HttpStatus.BAD_REQUEST.value());
+            ApiResponseDto apiResponseDto = new ApiResponseDto("중복된 아이디입니다.", HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponseDto);
         }
 
     }
 
     // 로그인 API
     @PostMapping("/user/login")
-    public ApiResponseDto login(@RequestBody LoginRequestDto loginRequestDto, HttpServletResponse res) {
+    public ResponseEntity<ApiResponseDto> login(@RequestBody LoginRequestDto loginRequestDto, HttpServletResponse res) {
         try {
-            return userService.login(loginRequestDto, res);
+            ApiResponseDto apiResponseDto = userService.login(loginRequestDto, res);
+            return ResponseEntity.status(HttpStatus.OK).body(apiResponseDto);
         } catch (IllegalArgumentException e) {
-            return new ApiResponseDto("ID 혹은 비밀번호 오류입니다.", HttpStatus.BAD_REQUEST.value());
+            ApiResponseDto apiResponseDto = new ApiResponseDto("ID 혹은 비밀번호 오류입니다.", HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponseDto);
         }
     }
 }
