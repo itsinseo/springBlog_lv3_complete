@@ -1,6 +1,6 @@
 package com.sparta.springBlog.service;
 
-import com.sparta.springBlog.Jwt.JwtUtil;
+import com.sparta.springBlog.jwt.JwtUtil;
 import com.sparta.springBlog.dto.*;
 import com.sparta.springBlog.entity.User;
 import com.sparta.springBlog.entity.UserRoleEnum;

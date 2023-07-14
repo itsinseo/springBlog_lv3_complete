@@ -1,8 +1,8 @@
 package com.sparta.springBlog.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.springBlog.Jwt.JwtAuthorizationFilter;
-import com.sparta.springBlog.Jwt.JwtUtil;
+import com.sparta.springBlog.jwt.JwtAuthorizationFilter;
+import com.sparta.springBlog.jwt.JwtUtil;
 import com.sparta.springBlog.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;

@@ -1,4 +1,4 @@
-package com.sparta.springBlog.Jwt;
+package com.sparta.springBlog.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.springBlog.dto.ApiResponseDto;

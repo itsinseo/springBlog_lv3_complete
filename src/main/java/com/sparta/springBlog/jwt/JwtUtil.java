@@ -1,4 +1,4 @@
-package com.sparta.springBlog.Jwt;
+package com.sparta.springBlog.jwt;
 
 import com.sparta.springBlog.entity.UserRoleEnum;
 import io.jsonwebtoken.*;
